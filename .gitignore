@@ -1,0 +1,42 @@
+# tmp files
+*~
+._*
+*.log
+
+# OS
+.DS_Store
+.Trashes
+.Spotlight-V100
+Thumbs.db
+Desktop.ini
+
+# IDE
+/.settings/
+/.idea/
+.classpath
+.buildpath
+.project/cache/
+.realsync
+*.iml
+*.iws
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# Project
+/config/nginx/
+/config/global.php
+/config/vhosts.php
+/config/SxGeo.dat
+/config/cron
+/cache/
+/logs/
+/tests/experiments
+/vendor/
+/media/
+/tmp/*
+.vagrant/
+/generated/
+/tests/unit/coverage/
+/node_modules/
+/debugger/
