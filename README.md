@@ -22,7 +22,7 @@ use RabotaApi\Exception;
 session_start();
 
 $client = new Client(
-    APP_CODE, // код приложения
+    APP_ID, // код приложения
     APP_SECRET, // секретный ключ приложения
     $_SESSION['token'],
     $_SESSION['expires']

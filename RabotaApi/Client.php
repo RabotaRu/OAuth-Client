@@ -54,7 +54,7 @@ class Client
         FIELD_EXPIRES_IN    = 'expires_in',    // Имя ключа времени жизни токена
         FIELD_SIGNATURE     = 'signature',     // Имя ключа подписи запроса
         FIELD_RESPONSE_TYPE = 'response_type', // Тип ответа, код или токен
-        FIELD_APP_CODE      = 'app_code',      // Код приложения
+        FIELD_APP_ID        = 'app_id',        // Код приложения
         FIELD_REDIRECT_URI  = 'redirect_uri',  // Адрес возрата
         FIELD_DISPLAY       = 'display',       // Вид страницы авторизации
         FIELD_APP_SECRET    = 'app_secret',    // Секрет приложения
@@ -90,7 +90,7 @@ class Client
      *
      * @var string
      */
-    protected $app_code = null;
+    protected $app_id = null;
 
     /**
      * Секретный код приложения
@@ -123,19 +123,19 @@ class Client
     /**
      * Конструктор
      *
-     * @param string|null $app_code             Индификатор приложения
+     * @param string|null $app_id               Индификатор приложения
      * @param string|null $app_secret           Секретный код приложения
      * @param null        $access_token
      * @param null        $access_token_expires
      *
      * @throws \Exception
      */
-    public function __construct($app_code, $app_secret, &$access_token = null, &$access_token_expires = null)
+    public function __construct($app_id, $app_secret, &$access_token = null, &$access_token_expires = null)
     {
         if (!extension_loaded('curl')) {
             throw new \Exception('Нет расширения curl');
         }
-        $this->app_code     = $app_code;
+        $this->app_id     = $app_id;
         $this->app_secret = $app_secret;
         $this->access_token = &$access_token;
         $this->access_token_expires = &$access_token_expires;
@@ -152,7 +152,7 @@ class Client
     {
         $parameters = [
             self::FIELD_RESPONSE_TYPE => self::RESPONSE_TYPE_CODE,
-            self::FIELD_APP_CODE      => $this->app_code,
+            self::FIELD_APP_ID      => $this->app_id,
             self::FIELD_REDIRECT_URI  => $redirect_uri,
             self::FIELD_DISPLAY       => $display,
         ];
@@ -174,7 +174,7 @@ class Client
             [
                 self::FIELD_RESPONSE_TYPE => self::RESPONSE_TYPE_TOKEN,
                 self::FIELD_CODE          => $code,
-                self::FIELD_APP_CODE      => $this->app_code,
+                self::FIELD_APP_ID      => $this->app_id,
                 self::FIELD_APP_SECRET    => $this->app_secret,
             ],
             self::HTTP_POST,
