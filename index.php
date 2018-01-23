@@ -9,7 +9,7 @@ use RabotaApi\Exception;
 
 // Создаем API клиента
 $client = new Client(
-    'Aksgh7ch','1PpWiBv6aUhbs6Dn4P4bAM321G3LYgQn',
+    1,'7fhoiKWQyr6X2xzZ1RJfH11pFmcShH0K',
     $_SESSION['token'], $_SESSION['expires']
 );
 
