@@ -26,7 +26,17 @@ class Client
 
     /**
      * Хост для апи
+     *
      * TODO add sandbox url
+     *
+     * В качестве посочницы могут выступать демо домены:
+     * - mercury.rabota.space
+     * - mars.rabota.space
+     * - neptune.rabota.space
+     * - saturn.rabota.space
+     * - uranus.rabota.space
+     *
+     * @see http://wiki.rabota.space/pages/viewpage.action?pageId=1605665
      *
      * @var string
      */
