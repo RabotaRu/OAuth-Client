@@ -1,4 +1,10 @@
 <?php
+/**
+ * API клиент для сайта Rabota.RU
+ *
+ * @author    Valentin Gernovich <vag@rdw.ru>
+ * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
+ */
 
 include_once 'RabotaApi/Client.php';
 include_once 'RabotaApi/Response.php';
@@ -16,7 +22,7 @@ $client = new Client(
 // Если редирект с авторизации приложения с токеном
 if (isset($_GET['code'])) {
     try {
-        $client->getAccessTokenFromCode($_GET['code']);
+        $client->requestToken($_GET['code']);
     } catch (Exception $e) {
         echo "Ошибка: {$e->getMessage()}";
     }
@@ -29,13 +35,13 @@ if (isset($_GET['code'])) {
 }
 
 // Неавторизирован
-if (!$client->getAccessToken() && !isset($_GET['auth'])) {
+if (!$client->getToken() && !isset($_GET['auth'])) {
     echo '<a href="?auth">Вход</a>';
     exit;
 }
 
 // Авторизация приложения
-if (!$client->getAccessToken() && isset($_GET['auth'])) {
+if (!$client->getToken() && isset($_GET['auth'])) {
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
