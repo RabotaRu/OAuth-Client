@@ -79,7 +79,7 @@ class Response
      * @param array    $parameters Параметры запорса
      * @param boolean  $debug      Режим отладки
      */
-    public function __construct($response, $ch, $url, array $parameters = [], $debug)
+    public function __construct($response, $ch, $url, array $parameters = [], $debug = false)
     {
         // разбор параметров запроса
         if ($debug) {

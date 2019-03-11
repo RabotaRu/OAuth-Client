@@ -13,19 +13,24 @@ include_once 'RabotaApi/Exception.php';
 use RabotaApi\Client;
 use RabotaApi\Exception;
 
+session_start();
+
+$config = include "config.php";
+
 // Создаем API клиента
 $client = new Client(
-    1,'4y6XbbNV4H0WWbICFdO4e265SVvPDLLi',
-    $_SESSION['token'], $_SESSION['expires']
+    $config['app_id'],$config['secret'], $_SESSION['token'], $_SESSION['expires']
 );
 
 // Если редирект с авторизации приложения с токеном
+
 if (isset($_GET['code'])) {
     try {
         $client->requestToken($_GET['code']);
     } catch (Exception $e) {
         echo "Ошибка: {$e->getMessage()}";
     }
+
     // Редиректим на себя же, чтоб убрать код из GET параметра
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
@@ -52,8 +57,7 @@ if (!$client->getToken() && isset($_GET['auth'])) {
 // Авторизированное состояние
 try {
     $response = $client->fetch(
-        '/v4/users/get.json',
-        ['ids' => ['me'], 'fields' => 'id,name,link,avatar_big']
+        $config['api']['route'], $config['api']['params'], "POST"
     );
     echo '<pre>';
     print_r($response->getJsonDecode());
