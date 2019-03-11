@@ -1,0 +1,21 @@
+{
+    "name": "poluyanov/rabota-api-client",
+    "description": "rabota.ru API Oauth client",
+    "type": "library",
+    "license": "bsd",
+    "authors": [
+        {
+            "name": "Igor Poluyanov",
+            "email": "ivp@rdw.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RabotaApi\\": "src/"
+        }
+    }
+}
