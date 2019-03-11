@@ -193,10 +193,7 @@ class Client
 
         if (isset($result[self::FIELD_TOKEN])) {
             $this->setToken($result[self::FIELD_TOKEN]);
-            $time = time() + $result[self::FIELD_EXPIRES];
-            $this->expires = $time;
-            $_SESSION['token'] = $result[self::FIELD_TOKEN];
-            $_SESSION['expires'] = $time;
+            $this->expires = time() + $result[self::FIELD_EXPIRES];
         }
         return $result;
     }
@@ -406,10 +403,7 @@ class Client
         )->getJsonDecode();
         if (isset($result[self::FIELD_TOKEN])) {
             $this->setToken($result[self::FIELD_TOKEN]);
-            $time = time();
-            $this->expires = $time + $result[self::FIELD_EXPIRES];
-            $_SESSION['token'] = $result[self::FIELD_TOKEN];
-            $_SESSION['expires'] = $time + $result[self::FIELD_EXPIRES];
+            $this->expires = time() + $result[self::FIELD_EXPIRES];
         }
         return $result;
     }

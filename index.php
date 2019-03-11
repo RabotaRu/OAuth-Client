@@ -6,9 +6,9 @@
  * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
-include_once 'RabotaApi/Client.php';
-include_once 'RabotaApi/Response.php';
-include_once 'RabotaApi/Exception.php';
+include_once 'src/Client.php';
+include_once 'src/Response.php';
+include_once 'src/Exception.php';
 
 use RabotaApi\Client;
 use RabotaApi\Exception;
@@ -22,11 +22,14 @@ $client = new Client(
     $config['app_id'],$config['secret'], $_SESSION['token'], $_SESSION['expires']
 );
 
+
 // Если редирект с авторизации приложения с токеном
 
 if (isset($_GET['code'])) {
     try {
         $client->requestToken($_GET['code']);
+        $_SESSION['token'] = $client->getToken();
+        $_SESSION['expires'] = $client->getExpires();
     } catch (Exception $e) {
         echo "Ошибка: {$e->getMessage()}";
     }
@@ -59,6 +62,8 @@ try {
     $response = $client->fetch(
         $config['api']['route'], $config['api']['params'], "POST"
     );
+    $_SESSION['token'] = $client->getToken();
+    $_SESSION['expires'] = $client->getExpires();
     echo '<pre>';
     print_r($response->getJsonDecode());
     echo '</pre>';
