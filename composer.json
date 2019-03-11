@@ -1,5 +1,5 @@
 {
-    "name": "poluyanov/rabota-api-client",
+    "name": "rabotaru/oauth-client",
     "description": "rabota.ru API Oauth client",
     "type": "library",
     "license": "bsd",
