@@ -4,10 +4,9 @@
     "type": "library",
     "license": "proprietary",
     "authors": [
-        {
-            "name": "Igor Poluyanov",
-            "email": "ivp@rdw.ru"
-        }
+      {
+        "name": "RabotaRu Team"
+      }
     ],
     "minimum-stability": "dev",
     "require": {
