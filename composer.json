@@ -2,7 +2,7 @@
     "name": "rabotaru/oauth-client",
     "description": "rabota.ru API Oauth client",
     "type": "library",
-    "license": "bsd",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Igor Poluyanov",
