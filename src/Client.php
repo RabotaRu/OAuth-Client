@@ -168,7 +168,7 @@ class Client
             self::FIELD_DISPLAY => $display,
             self::FIELD_SCOPE => $scope
         ];
-        return self::HOST . self::POINT_AUTHORIZATION . '?' . http_build_query($parameters, null, '&');
+        return $this->apiUri . self::POINT_AUTHORIZATION . '?' . http_build_query($parameters, null, '&');
     }
 
     /**
@@ -303,7 +303,7 @@ class Client
         $token = null
     )
     {
-        $url = self::HOST . $url;
+        $url = $this->apiUri . $url;
 
         // параметры из url передаются в список параметров
         if (strpos($url, '?') !== false) {
