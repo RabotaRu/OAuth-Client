@@ -24,19 +24,7 @@ Desktop.ini
 *.sublime-workspace
 
 # Project
-/config/nginx/
-/config/global.php
-/config/vhosts.php
-/config/SxGeo.dat
-/config/cron
-/cache/
-/logs/
-/tests/experiments
 /vendor/
-/media/
 /tmp/*
 .vagrant/
-/generated/
-/tests/unit/coverage/
 /node_modules/
-/debugger/

@@ -2,8 +2,7 @@
 /**
  * API клиент для сайта Rabota.RU
  *
- * @author    Valentin Gernovich <vag@rdw.ru>
- * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @license https://spdx.org/licenses/0BSD.html BSD Zero Clause License
  */
 
 namespace RabotaApi;
@@ -15,8 +14,6 @@ class Client
 {
     /**
      * HTTP методы
-     *
-     * @var string
      */
     public const
         HTTP_GET = 'GET',
@@ -24,24 +21,18 @@ class Client
 
     /**
      * Хост для апи
-     *
-     * TODO add sandbox url
-     *
-     * В качестве песочницы может выступать демо домен: neptune.rabota.space
-     * Он может содержать бейсик авторизация worker:umeC4Phahg
-     *
-     * @var string
      */
+    private const
+        HOST = 'https://api.rabota.ru',
+        SANDBOX_HOST = 'https://worker:umeC4Phahg@api.neptune.rabota.space';
 
-    private const HOST = 'https://api.rabota.ru';
-    private const SANDBOX_HOST = 'https://api.neptune.rabota.space';
-
-
+    /**
+     * Поле авторизации
+     */
     private const TOKEN_NAME = 'X-Token';
+
     /**
      * Основные эндпоинты
-     *
-     * @var string
      */
     private const
         POINT_AUTHORIZATION = '/oauth/authorize.html',    // Эндпоинт авторизации
@@ -51,8 +42,6 @@ class Client
 
     /**
      * Наименования полей
-     *
-     * @var string
      */
     private const
         FIELD_TOKEN = 'access_token',     // Имя ключа токена в ответе
@@ -65,9 +54,14 @@ class Client
         FIELD_TIME = 'time',      // Код для получения токена
         FIELD_SCOPE = 'scope';      // Требуемые разрешения
 
-    private const
-        PARAM_TOKEN = 'token'; //Параметр токена при запросе
+    /**
+     * Параметр токена при запросе
+     */
+    private const PARAM_TOKEN = 'token';
 
+    /**
+     * Скопы доступа
+     */
     public const
         SCOPE_PROFILE = 'profile',
         SCOPE_VACANSIES = 'vacancies',
@@ -75,14 +69,14 @@ class Client
 
     /**
      * Вид отображения окна авторизации
-     *
-     * @var string
      */
     public const
         DISPLAY_PAGE = 'page',  // в виде страници
         DISPLAY_POPUP = 'popup'; // в виде PopUp страници
 
-
+    /**
+     * @var string
+     */
     protected $apiUri;
 
     /**
@@ -136,6 +130,8 @@ class Client
     }
 
     /**
+     * Преключиться на песочницу
+     *
      * @param string $host
      */
     public function setSandbox($host = self::SANDBOX_HOST)
@@ -143,8 +139,8 @@ class Client
         $this->apiUri = $host;
     }
 
-    /*
-     *
+    /**
+     * Преключиться на продакшен
      */
     public function switchProd()
     {
@@ -156,6 +152,7 @@ class Client
      *
      * @param string $redirect Адрес редиректа после авторизации
      * @param string $display  Внешний вид диалога
+     * @param array  $scope
      *
      * @return string
      */
@@ -261,22 +258,16 @@ class Client
         $subscribe = false
     )
     {
-
         // если токен устарел, обновляем его
         if ($this->getToken() && $this->isExpires()) {
             $this->refreshToken();
         }
 
-        // подписываем запрос при необходимости
+        // подписываем запрос
         if ($subscribe) {
             $parameters[self::FIELD_TIME] = time();
-            $parameters[self::FIELD_SIGNATURE] = $this->getSignature($resource_url, $parameters);
+            $parameters[self::FIELD_SIGNATURE] = $this->getSignature($parameters);
         }
-        // добавление токена в параметры запроса
-        /* if ($this->token)
-         {
-             $parameters[self::FIELD_TOKEN] = $this->token;
-         }*/
 
         return $this->executeRequest(
             $resource_url,
@@ -292,6 +283,7 @@ class Client
      * @param string      $url        Адрес API метода
      * @param mixed       $parameters Параметры запроса
      * @param string|null $method     HTTP метод запроса
+     * @param null        $token
      *
      * @return \RabotaApi\Response
      * @throws \RabotaApi\Exception
@@ -340,7 +332,6 @@ class Client
         $ch = curl_init();
         curl_setopt_array($ch, $curl_options);
 
-        //echo curl_exec($ch); exit;
         $dialogue = new Response(curl_exec($ch), $ch, $url, $parameters);
 
         curl_close($ch);
@@ -404,8 +395,7 @@ class Client
             self::PARAM_TOKEN => $this->token,
             self::FIELD_APP_ID => $this->app_id
         ];
-        $parameters[self::FIELD_SIGNATURE] = $this->getSignature($resource_url, $parameters);
-        //  d(self::POINT_REFRESH_TOKEN, self::FIELD_TOKEN);
+        $parameters[self::FIELD_SIGNATURE] = $this->getSignature($parameters);
         $result = $this->executeRequest(
             $resource_url,
             $parameters,
@@ -419,24 +409,23 @@ class Client
     }
 
     /**
-     * Строит сигнатуру для ссылки с POST параметрами
+     * Строит подпись
      *
-     * @param string $url  Ссылка
-     * @param array  $post POST параметры
+     * @param array  $vars
      *
      * @return string
      */
-    private function getSignature($url, array $post = [])
+    private function getSignature(array $vars = [])
     {
-        foreach ($post as $k => $v) {
-            $post[$k] = (string)$v;
+        foreach ($vars as $k => $v) {
+            $vars[$k] = (string)$v;
         }
         $sort = function ($array) use (&$sort) {
             if (!is_array($array)) return $array;
             ksort($array);
             return array_map($sort, $array);
         };
-        return hash('sha256', json_encode($sort($post)) . $this->secret, false);
+        return hash('sha256', json_encode($sort($vars)) . $this->secret, false);
     }
 
 }

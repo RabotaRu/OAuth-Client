@@ -3,14 +3,14 @@
 Библиотека предоставляющая интерфейс для доступа к API [rabota.ru](http://rabota.ru/).
 Подробней об использовании API и доступных методах читайте в [документации](http://dev.rabota.ru/docs.html).
 
-[BSD License](http://www.opensource.org/licenses/bsd-license.php)
+[BSD Zero Clause License](https://spdx.org/licenses/0BSD.html)
 
 ## Установка
 
 Для установки используйте composer:
 
 ```
-composer require TODO название пакета
+composer require rabotaru/oauth-client
 ```
 
 ## Использование
@@ -87,5 +87,3 @@ $client->requestToken($code);
 
 В файле index.php можно посмотреть пример отправки запроса к API с авторизацией.
 
-TODO Библиотека ставится через composer
-TODO сделать зеркало на github

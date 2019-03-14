@@ -2,7 +2,7 @@
     "name": "rabotaru/oauth-client",
     "description": "rabota.ru API Oauth client",
     "type": "library",
-    "license": "proprietary",
+    "license": "0BSD",
     "authors": [
       {
         "name": "RabotaRu Team"

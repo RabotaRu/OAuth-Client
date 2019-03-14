@@ -2,8 +2,7 @@
 /**
  * API клиент для сайта Rabota.RU
  *
- * @author    Valentin Gernovich <vag@rdw.ru>
- * @license   http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @license https://spdx.org/licenses/0BSD.html BSD Zero Clause License
  */
 
 include_once 'src/Client.php';
