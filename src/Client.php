@@ -33,7 +33,7 @@ class Client
      * @var string
      */
 
-    //private const HOST = 'https://api.rabota.ru';
+    private const HOST = 'https://api.rabota.ru';
     private const SANDBOX_HOST = 'https://api.neptune.rabota.space';
 
 
