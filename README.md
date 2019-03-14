@@ -1,7 +1,7 @@
 # Api Client
 
-Библиотека предоставляющая интерфейс для доступа к API [rabota.ru](http://rabota.ru/).
-Подробней об использовании API и доступных методах читайте в [документации](http://dev.rabota.ru/docs.html).
+Библиотека предоставляющая интерфейс для доступа к API [rabota.ru](http://www.rabota.ru/).
+Подробней об использовании API и доступных методах читайте в [документации](https://dev.rabota.ru/doc.html).
 
 [BSD Zero Clause License](https://spdx.org/licenses/0BSD.html)
 
