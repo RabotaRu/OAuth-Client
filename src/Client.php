@@ -33,8 +33,8 @@ class Client
      * @var string
      */
 
-    private const HOST = 'https://api.rabota.ru';
-    private const SANDBOX_HOST = 'https://neptune.rabota.space';
+    //private const HOST = 'https://api.rabota.ru';
+    private const SANDBOX_HOST = 'https://api.neptune.rabota.space';
 
 
     private const TOKEN_NAME = 'X-Token';
@@ -136,11 +136,11 @@ class Client
     }
 
     /**
-     *
+     * @param string $host
      */
-    public function switchSandbox()
+    public function setSandbox($host = self::SANDBOX_HOST)
     {
-        $this->apiUri = static::SANDBOX_HOST;
+        $this->apiUri = $host;
     }
 
     /*
