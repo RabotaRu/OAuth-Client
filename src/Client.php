@@ -24,7 +24,7 @@ class Client
      */
     private const
         HOST = 'https://api.rabota.ru',
-        SANDBOX_HOST = 'https://worker:umeC4Phahg@api.neptune.rabota.space';
+        SANDBOX_HOST = 'https://api.rabota.wtf';
 
     /**
      * Поле авторизации
