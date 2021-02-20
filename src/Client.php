@@ -323,7 +323,10 @@ class Client
                 break;
             case self::HTTP_POST:
                 $curl_options[CURLOPT_POST] = true;
-                $curl_options[CURLOPT_POSTFIELDS] = http_build_query($parameters);
+                $data_string = json_encode($parameters);
+                $curl_options[CURLOPT_POSTFIELDS] = $data_string;
+                $curl_options[CURLOPT_HTTPHEADER][] = 'Content-Type:application/json';
+                $curl_options[CURLOPT_HTTPHEADER][] = 'Content-Length: ' . strlen($data_string);
                 break;
             default:
                 throw new Exception('no_support_method', 'Неподдерживаемый метод запроса', null);
